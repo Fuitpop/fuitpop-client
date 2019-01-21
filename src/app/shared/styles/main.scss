@@ -1,0 +1,15 @@
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+a {
+    color: var(--foreground-secondary);
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+        color: var(--primary);
+    }
+}
