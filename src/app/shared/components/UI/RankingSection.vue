@@ -41,12 +41,13 @@
     
     .rankingSection {
         display: grid;
+        grid-template-rows: 6rem auto;
     }
 
     .rankingSectionHeader {
         display: grid;
         grid-template-columns: 3rem auto;
-        grid-template-rows: 6rem;
+        height: 100%;
         grid-gap: 1rem;
         align-items: center;
 
