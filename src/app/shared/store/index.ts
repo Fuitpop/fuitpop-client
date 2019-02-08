@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 Vue.use(Vuex);
 
-const API = `http://api.fuitpop.com`;
+const API = `https://api.fuitpop.com`;
 
 export const store = new Vuex.Store({
 
