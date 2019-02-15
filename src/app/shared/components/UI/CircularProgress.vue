@@ -32,6 +32,7 @@
         grid-template-rows: 3.5rem auto;
         place-items: center;
         grid-gap: 0.25rem;
+        position: relative;
     }
 
     .ranking {

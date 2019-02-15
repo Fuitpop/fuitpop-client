@@ -1,19 +1,21 @@
 <template>
     <div :class="$style.homeView">
-        <ranking-section color="#FF6859" icon="flag" label="Daily Ranking" description="A daily rank of drivers' popularity on Twitter.">
-            <ranking-card :driver="driver" v-for="driver in daily.drivers" :key="`${driver.firstName}-${driver.lastName}-${driver.popularity}`">
+        <ranking-section color="#FF6859" icon="flag" label="Daily Ranking" :description="`A daily rank of drivers' popularity on Twitter for ${currentDate}.`">
+            <ranking-card daily :driver="driver" :index="index" v-for="(driver, index) in daily.drivers" :key="`${driver.firstName}-${driver.lastName}-${driver.popularity}`">
 
             </ranking-card>
+            <span v-if="Object.entries(daily).length === 0">There is currently no data for the daily drivers.</span>
         </ranking-section>
 
-        <ranking-section id="lastRace" color="#72DEFF" icon="trophy" label="Last Race" description="Drivers' popularity after the previous race.">
-            {{lastRace}}
+        <ranking-section id="lastRace" color="#72DEFF" icon="trophy" label="Last Race" description="Drivers' popularity after the last race.">
+            <span v-if="Object.entries(lastRace).length === 0">There is currently no data. Once the next race happens, the results will be listed here.</span>
         </ranking-section>
 
-        <ranking-section color="#FFCF44" icon="podium" label="Championship" description="Drivers' popularity after a race weekend concludes.">
-            <ranking-card :driver="driver" v-for="driver in championship" :key="`${driver.firstName}-${driver.lastName}-${driver.tally}`">
+        <ranking-section color="#FFCF44" icon="podium" label="Championship" description="Drivers' popularity championship.">
+            <ranking-card daily :driver="driver" :index="index" v-for="(driver, index) in championship" :key="`${driver.firstName}-${driver.lastName}-${driver.tally}`">
 
             </ranking-card>
+            <span v-if="Object.entries(championship).length === 0">There is currently no data for the championship.</span>
         </ranking-section>
     </div>
 </template>
@@ -22,6 +24,8 @@
     import { Vue, Component } from 'vue-property-decorator';
     import { State, Action } from 'vuex-class';
     import { RankingSection, RankingCard } from '@components/UI';
+
+    import moment from "moment";
 
     @Component({
         components: { RankingSection, RankingCard }
@@ -59,6 +63,10 @@
 
             this.refreshChampionship()
                 .finally(() => this.championshipLoading = false);
+        }
+
+        public get currentDate() {
+            return moment(new Date).format("DD/MM/YYYY");
         }
 
     }
