@@ -1,4 +1,4 @@
-# fuitpop
+# fuitpop-client
 
 ## Project setup
 ```
